@@ -1,26 +1,30 @@
 import React from 'react';
 import backgroundImage from '../assets/dani.jpeg';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
     <div>
-      <nav className="flex ml-10 justify-between items-center p-4 bg-white border-gray-200">
+      <nav className="flex ml-10 justify-between items-center p-4 bg-white border-gray-200 border-b">
         <div className="text-3xl font-bold border-4 border-black">Portofolio</div>
         <ul className="flex space-x-6 mr-10">
-          <li><a href="#product" className="text-gray-800 hover:text-gray-600">Profile</a></li>
-          <li><a href="#lifestyle" className="text-gray-800 hover:text-gray-600">Projects</a></li>
-          <li><a href="#news" className="text-gray-800 hover:text-gray-600">Contact</a></li>
+          <li><a href="#product" className="text-gray-800 text-lg font-bold">Profile</a></li>
+          <li><a href="#lifestyle" className="text-gray-800 hover:text-lg hover:font-bold">Projects</a></li>
+          <li><a href="#news" className="text-gray-800 hover:text-lg hover:font-bold">Contact</a></li>
+          <li><a href="/pictures" className="text-gray-800 hover:text-lg hover:font-bold">Pictures</a></li>
         </ul>
       </nav>
 
-      <section className="relative bg-cover bg-center h-screen mx-14 rounded-xl border-4 border-white" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <section className="relative bg-cover bg-center my-5 h-screen mx-14 rounded-xl border-4 border-white" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center">
           <h1 className="text-6xl font-bold">Portofolio</h1>
           <p className="mt-4 max-w-xl">
             Crafting spaces that harmonize modern aesthetics with timeless elegance, our contemporary interior designs breathe life into every room, redefining the essence of chic living.
           </p>
+          <Link to="/pictures"> 
           <button className="mt-6 px-6 py-3 bg-white text-black font-semibold rounded">View More</button>
+          </Link>
         </div>
       </section>
 
