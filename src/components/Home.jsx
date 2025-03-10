@@ -11,7 +11,7 @@ const Home = () => {
           <li><a href="#product" className="text-gray-800 text-lg font-bold">Profile</a></li>
           <li><a href="#lifestyle" className="text-gray-800 hover:text-lg hover:font-bold">Projects</a></li>
           <li><a href="#news" className="text-gray-800 hover:text-lg hover:font-bold">Contact</a></li>
-          <li><a href="/pictures" className="text-gray-800 hover:text-lg hover:font-bold">Pictures</a></li>
+          <Link to="/pictures"><li><a className="text-gray-800 hover:text-lg hover:font-bold">Pictures</a></li></Link>
         </ul>
       </nav>
 
