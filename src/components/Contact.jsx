@@ -39,9 +39,10 @@ const Contact = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap justify-between border-x">
           <div className="w-full md:w-1/2 p-4">
-            <h2 className="text-3xl font-bold mb-4">Hubungi Kami</h2>
-            <p className="mb-4">Silakan isi data di bawah ini dan tim kami akan segera menghubungi anda.</p>
-            <p className="mb-4">Untuk menghubungi kami secara langsung silakan hubungi whatsapp kami dengan menekan tombol di bawah ini.</p>
+            <h2 className="text-3xl font-bold mb-4">Hubungi Saya</h2>
+            <p className="mb-4">Silakan chat jika ingin mengenal saya lebih dalam.</p>
+            <p className="mb-4">Untuk menghubungi saya secara langsung silakan hubungi whatsapp.</p>
+            <p className="mb-4">Saya dengan menekan tombol di bawah ini.</p>
             <a href="https://wa.me/62816230703" className="bg-green-500 text-white font-bold py-2 px-4 rounded-full inline-block hover:bg-green-400">Hubungi Whatsapp kami</a>
           </div>
           <div className="w-full md:w-1/2 p-4 border-x">
