@@ -10,9 +10,22 @@ import mount4 from '../assets/mo1 (4).jpg';
 import mount5 from '../assets/mo1 (5).jpg';
 import mount6 from '../assets/mo1 (6).jpg';
 import { Link } from 'react-router-dom';
+import MountainModals from './MountainModals';
 
 const Pictures = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleOpenModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
 
   return (
     <div>
@@ -52,36 +65,54 @@ const Pictures = () => {
             <h1 className='font-bold text-black text-center text-lg py-2'>
                 Mountain 1
             </h1>
+            <div className='flex justify-center'> 
+              <button className="mb-4 px-1 py-1 text-sm bg-black hover:text-black hover:bg-white text-white font-semibold rounded-lg border-2 border-black" onClick={() => handleOpenModal(mount1)}>Click For Full Photo</button>
+            </div> 
           </div>
           <div className="rounded-lg overflow-hidden shadow-lg">
             <img src={mount2} alt="Photo 2" className="w-full h-48 object-cover" />
             <h1 className='font-bold text-black text-center text-lg py-2'>
                 Mountain 2
             </h1>
+            <div className='flex justify-center'> 
+              <button className="mb-4 px-1 py-1 text-sm bg-black hover:text-black hover:bg-white text-white font-semibold rounded-lg border-2 border-black" onClick={() => handleOpenModal(mount2)}>Click For Full Photo</button>
+            </div> 
           </div>
           <div className="rounded-lg overflow-hidden shadow-lg">
             <img src={mount3} alt="Photo 3" className="w-full h-48 object-cover" />
             <h1 className='font-bold text-black text-center text-lg py-2'>
                 Mountain 3
             </h1>
+            <div className='flex justify-center'> 
+              <button className="mb-4 px-1 py-1 text-sm bg-black hover:text-black hover:bg-white text-white font-semibold rounded-lg border-2 border-black" onClick={() => handleOpenModal(mount3)}>Click For Full Photo</button>
+            </div> 
           </div>
           <div className="rounded-lg overflow-hidden shadow-lg">
             <img src={mount4} alt="Photo 4" className="w-full h-48 object-cover" />
             <h1 className='font-bold text-black text-center text-lg py-2'>
                 Mountain 4
             </h1>
+            <div className='flex justify-center'> 
+              <button className="mb-4 px-1 py-1 text-sm bg-black hover:text-black hover:bg-white text-white font-semibold rounded-lg border-2 border-black" onClick={() => handleOpenModal(mount4)}>Click For Full Photo</button>
+            </div> 
           </div>
           <div className="rounded-lg overflow-hidden shadow-lg">
             <img src={mount5} alt="Photo 5" className="w-full h-48 object-cover" />
             <h1 className='font-bold text-black text-center text-lg py-2'>
                 Mountain 5
             </h1>
+            <div className='flex justify-center'> 
+              <button className="mb-4 px-1 py-1 text-sm bg-black hover:text-black hover:bg-white text-white font-semibold rounded-lg border-2 border-black" onClick={() => handleOpenModal(mount5)}>Click For Full Photo</button>
+            </div> 
           </div>
           <div className="rounded-lg overflow-hidden shadow-lg">
             <img src={mount6} alt="Photo 6" className="w-full h-48 object-cover" />
             <h1 className='font-bold text-black text-center text-lg py-2'>
                 Mountain 6
             </h1>
+            <div className='flex justify-center'> 
+              <button className="mb-4 px-1 py-1 text-sm bg-black hover:text-black hover:bg-white text-white font-semibold rounded-lg border-2 border-black" onClick={() => handleOpenModal(mount6)}>Click For Full Photo</button>
+            </div> 
           </div>
         </div>
       </div>
@@ -112,6 +143,8 @@ const Pictures = () => {
           <button className="mt-6 px-2 py-2 bg-black hover:text-black hover:bg-white text-white font-semibold rounded-lg border-2 border-black">ORDER ME</button>
         </div>
       </div>
+
+      <MountainModals isOpen={isModalOpen} onClose={handleCloseModal} imageSrc={selectedImage} />
     </div>
   );
 }
