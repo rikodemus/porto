@@ -69,9 +69,13 @@ const Pictures = () => {
         console.log('✅ Booking Saved:', data);
 
         // Panggil backend untuk mengirim email
-        const response = await fetch('http://localhost:3001/api/book', {
+        const response = await fetch('https://xyzcompany.supabase.co/rest/v1/porto', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+              'Content-Type': 'application/json',
+              'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zbmdvdWxveW9oaWF2bmh6Y2NvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5MjI0ODIsImV4cCI6MjA1NzQ5ODQ4Mn0.5kAkSgR6Lo8tsPQ0XYMKvv7zmi6wQ9WwzpDFlpsjM6g',
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zbmdvdWxveW9oaWF2bmh6Y2NvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5MjI0ODIsImV4cCI6MjA1NzQ5ODQ4Mn0.5kAkSgR6Lo8tsPQ0XYMKvv7zmi6wQ9WwzpDFlpsjM6g'
+          },
             body: JSON.stringify(bookingDetails)
         });
 
