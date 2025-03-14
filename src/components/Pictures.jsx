@@ -11,6 +11,12 @@ import mount5 from '../assets/mo1 (5).jpg';
 import mount6 from '../assets/mo1 (6).jpg';
 import { Link } from 'react-router-dom';
 import MountainModals from './MountainModals';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase
+const supabaseUrl = 'https://nsngouloyohiavnhzcco.supabase.co'; // Replace with your Supabase URL
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zbmdvdWxveW9oaWF2bmh6Y2NvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MTkyMjQ4MiwiZXhwIjoyMDU3NDk4NDgyfQ.tWdYIo1rUDnCgKDfRQ2knA14ito1aNZJXUsqVn0To8M'; // Replace with your Supabase anon key
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Pictures = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,24 +57,40 @@ const Pictures = () => {
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
+    console.log("🚀 Submitting Booking:", bookingDetails); // Debugging input data
+
     try {
-      const response = await fetch('http://localhost:3001/api/book', { // Update the port here
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bookingDetails),
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      console.log('Booking Details:', data);
-      handleCloseBookingModal();
+        const { data, error } = await supabase
+            .from('porto')
+            .insert([{ name: bookingDetails.name, email: bookingDetails.email, date: bookingDetails.date }]); 
+
+        if (error) throw new Error('❌ Error inserting data: ' + error.message);
+
+        console.log('✅ Booking Saved:', data);
+
+        // Panggil backend untuk mengirim email
+        const response = await fetch('http://localhost:3001/api/book', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bookingDetails)
+        });
+
+        const result = await response.json();
+        console.log('📩 Email Response:', result);
+
+        if (response.ok) {
+            alert('Booking confirmed & email sent!');
+        } else {
+            alert('Error sending email: ' + result.error);
+        }
+
+        handleCloseBookingModal();
     } catch (error) {
-      console.error('Error:', error);
+        console.error('❌ Booking Error:', error.message);
+        alert('There was an error processing your booking: ' + error.message);
     }
-  };
+};
+
 
   return (
     <div>

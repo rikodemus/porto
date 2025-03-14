@@ -1,80 +1,62 @@
 const express = require('express');
-const mysql = require('mysql');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
-const port = 3001; // Change the port here
+const port = 3001;
+
+// Initialize Supabase
+const supabaseUrl = 'https://nsngouloyohiavnhzcco.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zbmdvdWxveW9oaWF2bmh6Y2NvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5MjI0ODIsImV4cCI6MjA1NzQ5ODQ4Mn0.5kAkSgR6Lo8tsPQ0XYMKvv7zmi6wQ9WwzpDFlpsjM6g'; // Pastikan menggunakan API Key yang benar
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-
-// MySQL connection
-const db = mysql.createConnection({
-  host: 'localhost', // Update the hostname to 'localhost'
-  user: 'rikodemus', // Replace with your MySQL username
-  password: 'frigate10', // Replace with your MySQL password
-  database: 'porto',
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL:', err);
-    throw err;
-  }
-  console.log('MySQL connected...');
-});
 
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'nextgoat55@gmail.com',
-    pass: 'ngwa nfes xkxy fsgd',
+    pass: 'fskt htfp fyhx cvdx', // Ganti dengan App Password dari Google
   },
 });
 
 // Routes
-app.post('/api/book', (req, res) => {
+app.post('/api/book', async (req, res) => {
   const { name, email, date } = req.body;
 
-  const checkQuery = 'SELECT * FROM bookings WHERE name = ? AND email = ? AND date = ?';
-  db.query(checkQuery, [name, email, date], (checkErr, checkResult) => {
-    if (checkErr) {
-      console.error('Error checking for existing booking:', checkErr);
-      return res.status(500).send(checkErr.toString());
-    }
-    if (checkResult.length > 0) {
-      return res.status(400).send('Booking already exists.');
-    }
+  console.log('📩 Received booking request:', { name, email, date });
 
-    const query = 'INSERT INTO bookings (name, email, date) VALUES (?, ?, ?)';
-    db.query(query, [name, email, date], (err, result) => {
-      if (err) {
-        console.error('Error executing query:', err);
-        return res.status(500).send(err.toString());
+  try {
+    // Kirim email setelah booking berhasil masuk ke database
+    const mailOptions = {
+      from: 'nextgoat55@gmail.com',
+      to: email,
+      subject: 'Booking Confirmation',
+      text: `Hello ${name},\n\nYour booking for ${date} has been confirmed.\n\nThank you!`,
+    };
+
+    console.log('📩 Sending email with options:', mailOptions);
+    
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('❌ Error sending email:', error);
+        return res.status(500).json({ error: 'Error sending email: ' + error.message });
       }
-
-      const mailOptions = {
-        from: 'nextgoat55@gmail.com',
-        to: email,
-        subject: 'Booking Confirmation',
-        text: `Hello ${name},\n\nYour booking for ${date} has been confirmed.\n\nThank you!`,
-      };
-
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error sending email:', error);
-          return res.status(500).send(error.toString());
-        }
-        res.status(200).send('Booking confirmed and email sent.');
-      });
+      console.log('✅ Email sent: ' + info.response);
+      res.status(200).json({ message: 'Booking confirmed and email sent.' });
     });
-  });
+
+  } catch (err) {
+    console.error('❌ Unexpected Error:', err);
+    res.status(500).json({ error: 'An unexpected error occurred: ' + err.message });
+  }
 });
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`🚀 Server running on port ${port}`);
 });
