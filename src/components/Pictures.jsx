@@ -69,7 +69,7 @@ const Pictures = () => {
         console.log('✅ Booking Saved:', data);
 
         // Panggil backend untuk mengirim email
-        const response = await fetch('https://xyzcompany.supabase.co/rest/v1/porto', {
+        const response = await fetch('https://nsngouloyohiavnhzcco.supabase.co/rest/v1/porto', {
             method: 'POST',
             headers: { 
               'Content-Type': 'application/json',
