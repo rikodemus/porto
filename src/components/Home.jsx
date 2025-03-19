@@ -41,7 +41,7 @@ const Home = () => {
         <div className="inset-0 opacity-50 rounded-lg"></div>
         <div className="relative z-10 flex flex-col items-end text-white text-right">
           <h2 className="text-2xl font-semibold text-[#FFAA00] mt-2">Web Developer</h2>
-          <p className="mt-4 max-w-xl">
+          <p className="mt-4 max-w-xl text-right">
             Passionate about creating modern and responsive web applications. Skilled in both frontend and backend development.
           </p>
           <Link to="/contact">
