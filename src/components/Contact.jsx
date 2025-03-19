@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import backgroundImage from '../assets/dani.jpeg';
+import backgroundImage from '../assets/richo.jpg';
 import backgroundImage1 from '../assets/radit.jpeg';
 
 const Contact = () => {
@@ -12,7 +12,7 @@ const Contact = () => {
         <div className="container mx-auto flex flex-wrap items-center justify-between p-4">
           <div className="flex items-center">
             <img src={backgroundImage} alt="Logo" className="h-10 w-10 mr-3 rounded-full" />
-            <div className="text-3xl font-bold">Portofolio</div>
+            <div className="text-3xl font-bold">Richo's Portofolio</div>
           </div>
           <button
             className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -43,14 +43,14 @@ const Contact = () => {
             <p className="mb-4">Silakan chat jika ingin mengenal saya lebih dalam.</p>
             <p className="mb-4">Untuk menghubungi saya secara langsung silakan hubungi whatsapp.</p>
             <p className="mb-4">Saya dengan menekan tombol di bawah ini.</p>
-            <a href="https://wa.me/62816230703" className="bg-green-500 text-white font-bold py-2 px-4 rounded-full inline-block hover:bg-green-400">Hubungi Whatsapp kami</a>
+            <a href="https://wa.me/628112461984" className="bg-green-500 text-white font-bold py-2 px-4 rounded-full inline-block hover:bg-green-400">Hubungi Whatsapp saya</a>
           </div>
           <div className="w-full md:w-1/2 p-4 border-x">
             <h2 className="text-3xl font-bold mb-4">Email & Whatsapp</h2>
-            <p className="mb-2"><strong>Email:</strong> jovanidaniel23@gmail.com</p>
-            <p className="mb-2"><strong>Whatsapp:</strong> +62 851 6230 703</p>
-            <p className="mb-2"><strong>Address:</strong> Jl. Surya Baru No. 2</p>
-            <p className="mb-2"><strong>DOB:</strong> 23 July 2003</p>
+            <p className="mb-2"><strong>Email:</strong> gregoriusricho8@gmail.com</p>
+            <p className="mb-2"><strong>Whatsapp:</strong> +62 821 1246 1984</p>
+            <p className="mb-2"><strong>Address:</strong> Perumahan Telaga Metro</p>
+            <p className="mb-2"><strong>DOB:</strong> 18 November 2003</p>
           </div>
         </div>
       </div>
@@ -58,9 +58,9 @@ const Contact = () => {
       <section className="relative bg-cover bg-center my-5 h-72 rounded-xl border-4 border-white" style={{ backgroundImage: `url(${backgroundImage1})` }}>
         <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center">
-          <h1 className="text-6xl font-bold">Daniel Jovani</h1>
+          <h1 className="text-6xl font-bold">Gregorius Richo</h1>
           <p className="mt-4 max-w-xl">
-            Frugal Living.
+            Ora Et Labora.
           </p>
         </div>
       </section>

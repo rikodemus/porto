@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import backgroundImage from '../assets/dani.jpeg';
-import backgroundImage1 from '../assets/con1 (1).jpeg';
-import backgroundImage2 from '../assets/con1 (2).jpeg';
-import backgroundImage3 from '../assets/con1 (3).jpeg';
+import backgroundImage from '../assets/richo.jpg';
 import mount1 from '../assets/mo1 (1).jpg';
 import mount2 from '../assets/mo1 (2).jpg';
 import mount3 from '../assets/mo1 (3).jpg';
@@ -11,23 +8,13 @@ import mount5 from '../assets/mo1 (5).jpg';
 import mount6 from '../assets/mo1 (6).jpg';
 import { Link } from 'react-router-dom';
 import MountainModals from './MountainModals';
-import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase
-const supabaseUrl = 'https://nsngouloyohiavnhzcco.supabase.co'; // Replace with your Supabase URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zbmdvdWxveW9oaWF2bmh6Y2NvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MTkyMjQ4MiwiZXhwIjoyMDU3NDk4NDgyfQ.tWdYIo1rUDnCgKDfRQ2knA14ito1aNZJXUsqVn0To8M'; // Replace with your Supabase anon key
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Pictures = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [bookingDetails, setBookingDetails] = useState({
-    name: '',
-    email: '',
-    date: '',
-  });
+
 
   const handleOpenModal = (imageSrc) => {
     setSelectedImage(imageSrc);
@@ -39,70 +26,13 @@ const Pictures = () => {
     setSelectedImage(null);
   };
 
-  const handleOpenBookingModal = () => {
-    setIsBookingModalOpen(true);
-  };
-
-  const handleCloseBookingModal = () => {
-    setIsBookingModalOpen(false);
-  };
-
-  const handleBookingChange = (e) => {
-    const { name, value } = e.target;
-    setBookingDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
-  };
-
-  const handleBookingSubmit = async (e) => {
-    e.preventDefault();
-    console.log("🚀 Submitting Booking:", bookingDetails); // Debugging input data
-
-    try {
-        const { data, error } = await supabase
-            .from('porto')
-            .insert([{ name: bookingDetails.name, email: bookingDetails.email, date: bookingDetails.date }]); 
-
-        if (error) throw new Error('❌ Error inserting data: ' + error.message);
-
-        console.log('✅ Booking Saved:', data);
-
-        // Panggil backend untuk mengirim email
-        const response = await fetch('https://nsngouloyohiavnhzcco.supabase.co/rest/v1/porto', {
-            method: 'POST',
-            headers: { 
-              'Content-Type': 'application/json',
-              'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zbmdvdWxveW9oaWF2bmh6Y2NvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5MjI0ODIsImV4cCI6MjA1NzQ5ODQ4Mn0.5kAkSgR6Lo8tsPQ0XYMKvv7zmi6wQ9WwzpDFlpsjM6g',
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zbmdvdWxveW9oaWF2bmh6Y2NvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5MjI0ODIsImV4cCI6MjA1NzQ5ODQ4Mn0.5kAkSgR6Lo8tsPQ0XYMKvv7zmi6wQ9WwzpDFlpsjM6g'
-          },
-            body: JSON.stringify(bookingDetails)
-        });
-
-        const result = await response.json();
-        console.log('📩 Email Response:', result);
-
-        if (response.ok) {
-            alert('Booking confirmed & email sent!');
-        } else {
-            alert('Error sending email: ' + result.error);
-        }
-
-        handleCloseBookingModal();
-    } catch (error) {
-        console.error('❌ Booking Error:', error.message);
-        alert('There was an error processing your booking: ' + error.message);
-    }
-};
-
-
   return (
     <div>
       <nav className="bg-white border-gray-200 border-b">
         <div className="container mx-auto flex flex-wrap items-center justify-between p-4">
           <div className="flex items-center">
             <img src={backgroundImage} alt="Logo" className="h-10 w-10 mr-3 rounded-full" />
-            <div className="text-3xl font-bold">Portofolio</div>
+            <div className="text-3xl font-bold">Richo's Portofolio</div>
           </div>
           <button
             className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -186,101 +116,9 @@ const Pictures = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 text-center text-2xl font-bold border-2 mt-11 shadow-2xl rounded-lg mb-5 ">
-        Exclusive Content
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10 ">
-          <div className="rounded-lg overflow-hidden shadow-lg">
-            <img src={backgroundImage1} alt="Photo 1" className="w-full h-48 object-cover" />
-            <h1 className='font-bold text-black text-center text-lg py-2'>
-                Smile Me
-            </h1>
-          </div>
-          <div className="rounded-lg overflow-hidden shadow-lg">
-            <img src={backgroundImage2} alt="Photo 2" className="w-full h-48 object-cover" />
-            <h1 className='font-bold text-black text-center text-lg py-2'>
-                Smile Me (2)
-            </h1>
-          </div>
-          <div className="rounded-lg overflow-hidden shadow-lg">
-            <img src={backgroundImage3} alt="Photo 3" className="w-full h-48 object-cover" />
-            <h1 className='font-bold text-black text-center text-lg py-2'>
-                Thrifting Era
-            </h1>
-          </div>
-        </div>
-        <div className='flex justify-center'> 
-          <button className="mt-6 px-2 py-2 bg-black hover:text-black hover:bg-white text-white font-semibold rounded-lg border-2 border-black" onClick={handleOpenBookingModal}>ORDER ME</button>
-        </div>
-      </div>
-
       <MountainModals isOpen={isModalOpen} onClose={handleCloseModal} imageSrc={selectedImage} />
 
-      {isBookingModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">Book Your Order</h2>
-            <form onSubmit={handleBookingSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={bookingDetails.name}
-                  onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={bookingDetails.email}
-                  onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
-                  Date
-                </label>
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  value={bookingDetails.date}
-                  onChange={handleBookingChange}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  required
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  onClick={handleCloseBookingModal}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 }
