@@ -59,7 +59,7 @@ const Home = () => {
             <div className="w-full md:w-1/3 px-4 flex flex-col justify-center">
               <h2 className="text-4xl font-bold mb-4 text-[#FFAA00]">ABOUT ME</h2>
               <p className="text-white mb-4 font-serif">I am a 7th-semester Information Systems student with a strong interest in system development, data visualization, and UI/UX programming. Currently, I am enhancing my skills in programming, web design, and data management to support data-driven decision-making.</p>
-              <button className="mt-6 px-6 py-3 bg-black text-white font-semibold rounded">Click For Details</button>
+              <Link to="/pictures"><button className="mt-6 px-6 py-3 border text-white font-semibold hover:bg-[#FFAA00] rounded">Click For Details</button></Link>
             </div>
           </div>
         </div>
